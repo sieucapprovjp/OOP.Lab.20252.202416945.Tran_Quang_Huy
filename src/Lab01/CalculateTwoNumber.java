@@ -1,36 +1,45 @@
 package Lab01;
-import javax.swing.JOptionPane;
+import java.util.Scanner;
 
 public class CalculateTwoNumber {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        String strNum1 = JOptionPane.showInputDialog(null, "Please input the first number:", "Input First Number", JOptionPane.INFORMATION_MESSAGE);
-        String strNum2 = JOptionPane.showInputDialog(null, "Please input the second number:", "Input Second Number", JOptionPane.INFORMATION_MESSAGE);
+        // Prompt user for the first number
+        System.out.print("Enter the first number: ");
+        double num1;
+        try {
+            num1 = Double.parseDouble(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid number.");
+            return;
+        }
 
-        double num1 = Double.parseDouble(strNum1);
-        double num2 = Double.parseDouble(strNum2);
+        // Prompt user for the second number
+        System.out.print("Enter the second number: ");
+        double num2;
+        try {
+            num2 = Double.parseDouble(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid number.");
+            return;
+        }
 
+        // Calculate and display the sum, difference, product, and quotient
         double sum = num1 + num2;
         double difference = num1 - num2;
         double product = num1 * num2;
 
-
-        String quotient;
-        if (num2 != 0) {
-            quotient = String.valueOf(num1 / num2);
+        if (num2 == 0) {
+            System.out.println("Error: Division by zero is not allowed.");
         } else {
-            quotient = "Undefined";
+            double quotient = num1 / num2;
+            System.out.printf("Sum: %.2f\n", sum);
+            System.out.printf("Difference: %.2f\n", difference);
+            System.out.printf("Product: %.2f\n", product);
+            System.out.printf("Quotient: %.2f\n", quotient);
         }
 
-
-        String result = "Sum: " + sum + "\n" +
-                "Difference: " + difference + "\n" +
-                "Product: " + product + "\n" +
-                "Quotient: " + quotient;
-
-
-        JOptionPane.showMessageDialog(null, result, "Results", JOptionPane.INFORMATION_MESSAGE);
-
-        System.exit(0);
+        scanner.close();
     }
 }
