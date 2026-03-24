@@ -28,3 +28,18 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+# Compiled Java files
+*.class
+
+# IntelliJ IDEA files
+.idea/
+*.iml
+
+# Output directories
+out/
+bin/
+
+# OS specific files
+.DS_Store
+Thumbs.db
