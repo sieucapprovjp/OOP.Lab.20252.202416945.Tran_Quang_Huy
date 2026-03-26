@@ -1,3 +1,5 @@
+// E6.2 Input/Output from keyboard
+
 package Lab01;
 import java.util.Scanner;
 public class Input_From_KeyBoard {

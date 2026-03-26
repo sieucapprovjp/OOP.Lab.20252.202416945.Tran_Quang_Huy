@@ -1,4 +1,4 @@
-
+// 2.2.6
 package Lab01;
 import java.util.Scanner;
 
