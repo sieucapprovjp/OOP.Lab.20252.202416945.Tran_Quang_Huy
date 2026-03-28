@@ -1,0 +1,16 @@
+Questions:
+What happens if users choose “Cancel”?
+How to customize the options to users, e.g. only two options: “Yes” and “No”, OR “I do”
+and “I don’t” (Suggestion: Use Javadocs or using Eclipse/Netbean IDE help).
+
+1. Điều gì xảy ra khi người dùng chọn "Cancel"?
+Khi nhấn Cancel, biến option sẽ nhận giá trị tương ứng với hằng số JOptionPane.CANCEL_OPTION.
+Dựa vào đoạn mã xử lý ở Hình 28: (option == JOptionPane.YES_OPTION ? "Yes" : "No").
+Vì option lúc này (giá trị là 2) không bằng YES_OPTION (giá trị là 0), biểu thức điều kiện sẽ trả về kết quả là "No".
+Hộp thoại thông báo cuối cùng sẽ hiển thị: "You've chosen: No".
+
+2. Cách tùy chỉnh các tùy chọn (ví dụ: chỉ "Yes/No" hoặc "I do/I don't")
+Có thể thực hiện như sau:
+Chỉ hiển thị "Yes" và "No": Sử dụng hàm showConfirmDialog với đầy đủ tham số hơn, trong đó tham số optionType được truyền vào là JOptionPane.YES_NO_OPTION.
+Tùy chỉnh nhãn nút ("I do" và "I don't"): Chuyển sang sử dụng phương thức JOptionPane.showOptionDialog.
+Cách hoạt động: Hàm này cho phép bạn truyền một mảng các đối tượng (ví dụ: String[] options = {"I do", "I don't"};) để thay thế các nút mặc định bằng các nhãn văn bản do bản thân tự định nghĩa.
