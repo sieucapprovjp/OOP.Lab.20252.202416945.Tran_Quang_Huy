@@ -1,6 +1,6 @@
 // Ex 6.1
 // Write, compile and run the ChoosingOption program:
-package Lab01;
+
 import javax.swing.JOptionPane;
 
 public class ChoosingOption {
