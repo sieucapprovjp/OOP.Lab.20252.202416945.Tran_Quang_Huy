@@ -1,7 +1,9 @@
+// Ex 2.2.6 Equations solver
+// Press 1,2 or 3 to choose
+
 import javax.swing.JOptionPane;
 
 public class EquationsSolver {
-
     public static void main(String[] args) {
         String menu = "Chọn loại phương trình cần giải:\n"
                 + "1. Phương trình bậc nhất một ẩn (ax + b = 0)\n"
