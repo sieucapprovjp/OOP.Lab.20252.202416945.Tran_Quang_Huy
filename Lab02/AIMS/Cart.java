@@ -3,11 +3,9 @@ public class Cart {
 
     // Section 11: class constant
     public static final int MAX_NUMBERS_ORDERED = 20;
-
     // Section 11: attributes
     private DigitalVideoDisc[] itemsOrdered = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
     private int qtyOrdered = 0;
-
     // Section 11: add one DVD
     public void addDigitalVideoDisc(DigitalVideoDisc disc) {
         if (qtyOrdered == MAX_NUMBERS_ORDERED) {
@@ -29,13 +27,11 @@ public class Cart {
             addDigitalVideoDisc(disc);
         }
     }
-
     // Section 14.2: overload - add two DVDs at once
     public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
         addDigitalVideoDisc(dvd1);
         addDigitalVideoDisc(dvd2);
     }
-
     // Section 11: remove a DVD
     public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
         boolean found = false;
@@ -56,7 +52,6 @@ public class Cart {
             System.out.println("The disc \"" + disc.getTitle() + "\" is not in the cart.");
         }
     }
-
     // Section 11: total cost
     public float totalCost() {
         float total = 0;
@@ -65,7 +60,6 @@ public class Cart {
         }
         return total;
     }
-
     // Section 12: display cart items
     public void displayCart() {
         System.out.println("------- Current Cart -------");
@@ -78,7 +72,6 @@ public class Cart {
         System.out.printf("%-29s %.2f%n", "Total Cost", totalCost());
         System.out.println("----------------------------");
     }
-
     public int getQtyOrdered() {
         return qtyOrdered;
     }

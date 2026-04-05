@@ -2,16 +2,13 @@ package AIMS;
 public class Testingparameter {
 
     public static void main(String[] args) {
-
         // Section 15: Test pass by value
         DigitalVideoDisc jungleDVD = new DigitalVideoDisc("Jungle");
         DigitalVideoDisc cinderellaDVD = new DigitalVideoDisc("Cinderella");
-
         // swap() - references are passed by value, so swap has NO effect outside
         swap(jungleDVD, cinderellaDVD);
         System.out.println("jungle dvd title: " + jungleDVD.getTitle());
         System.out.println("cinderella dvd title: " + cinderellaDVD.getTitle());
-
         // changeTitle() - the object itself is mutated via the reference copy, so it DOES change
         changeTitle(jungleDVD, cinderellaDVD.getTitle());
         System.out.println("jungle dvd title: " + jungleDVD.getTitle());

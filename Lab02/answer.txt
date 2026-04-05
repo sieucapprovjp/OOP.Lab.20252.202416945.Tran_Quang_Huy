@@ -1,7 +1,7 @@
 Câu hỏi: Nếu tạo constructor để khởi tạo DVD bằng title, rồi
 tạo thêm constructor để khởi tạo DVD bằng category.
 Java có cho phép điều này không?
-Trả lờigit :
+Trả lời:
 Không, Java KHÔNG cho phép điều này.
 Java phân biệt các constructor overload dựa trên kiểu dữ liệu
 và số lượng tham số, không dựa vào tên tham số.

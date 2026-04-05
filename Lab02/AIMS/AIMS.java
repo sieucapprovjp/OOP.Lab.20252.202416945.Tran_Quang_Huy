@@ -5,7 +5,6 @@ public class AIMS {
 
         // Section 12: Create a new cart
         Cart anOrder = new Cart();
-        // Create DVD objects and add to cart
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King",
                 "Animation", "Roger Allers", 87, 19.95f);
         anOrder.addDigitalVideoDisc(dvd1);
@@ -15,7 +14,6 @@ public class AIMS {
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin",
                 "Animation", 18.99f);
         anOrder.addDigitalVideoDisc(dvd3);
-        // Display cart and total cost
         anOrder.displayCart();
 
         // Section 13: Remove a DVD and display again
