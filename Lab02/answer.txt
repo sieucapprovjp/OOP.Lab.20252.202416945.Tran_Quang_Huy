@@ -1,0 +1,23 @@
+Câu hỏi: Nếu tạo constructor để khởi tạo DVD bằng title, rồi
+tạo thêm constructor để khởi tạo DVD bằng category.
+Java có cho phép điều này không?
+Trả lờigit :
+Không, Java KHÔNG cho phép điều này.
+Java phân biệt các constructor overload dựa trên kiểu dữ liệu
+và số lượng tham số, không dựa vào tên tham số.
+Cả hai constructor đều có signature:
+    DigitalVideoDisc(String value)
+Vì cùng nhận một tham số kiểu String, Java không thể phân biệt
+được hai constructor này và sẽ báo lỗi compile-time:
+"Duplicate method DigitalVideoDisc(String) in type DigitalVideoDisc"
+Để giải quyết, cần dùng các tổ hợp tham số khác nhau, ví dụ:
+    DigitalVideoDisc(String title)
+    DigitalVideoDisc(String title, String category, float cost)
+Đây là overload hợp lệ vì signature khác nhau.
+
+Câu hỏi 2: Java là ngôn ngữ Pass by Value hay Pass by Reference?
+
+Trả lời:
+Java LUÔN LUÔN là Pass by Value (truyền tham trị).
+Khi truyền một object vào method, Java truyền một BẢN SAO
+của tham chiếu (địa chỉ bộ nhớ), không phải tham chiếu gốc.

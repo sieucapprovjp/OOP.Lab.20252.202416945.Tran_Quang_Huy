@@ -1,3 +1,4 @@
+package AIMS;
 public class Testingparameter {
 
     public static void main(String[] args) {

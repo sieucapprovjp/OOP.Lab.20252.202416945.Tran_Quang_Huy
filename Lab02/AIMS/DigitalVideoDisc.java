@@ -1,3 +1,4 @@
+package AIMS;
 public class DigitalVideoDisc {
 
     // Section 16: classifier member (static)
