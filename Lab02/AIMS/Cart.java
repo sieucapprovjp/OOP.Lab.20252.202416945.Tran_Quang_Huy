@@ -1,3 +1,4 @@
+package Lab02.AIMS;
 public class Cart {
 
     // Section 11: class constant

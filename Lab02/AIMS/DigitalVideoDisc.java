@@ -1,3 +1,4 @@
+package Lab02.AIMS;
 public class DigitalVideoDisc {
     // Section 16: classifier member (static)
     private static int nbDigitalVideoDiscs = 0;
@@ -69,16 +70,16 @@ public class DigitalVideoDisc {
     }
     public void playDVD() {
         if (this.length <= 0) {
-            System.out.println("The DVD \"" + title + "\" cannot be played.");
+            System.out.println("The DVD \""+title+"\" cannot be played.");
         } else {
-            System.out.println("Playing DVD: " + title + " (" + length + " mins)");
+            System.out.println("Playing DVD: "+title+"("+length+" mins)");
         }
     }
     public void displayInfo() {
-        System.out.println("  ID: " + id + " | Title: " + title
-                + " | Category: " + category
-                + " | Director: " + director
-                + " | Length: " + length + " mins"
-                + " | Cost: " + cost);
+        System.out.println("ID: "+id+"|Title:"+title
+                +"|Category: "+category
+                +"|Director: "+director
+                +"|Length: "+length + " mins"
+                +"|Cost:"+cost);
     }
 }
