@@ -1,6 +1,4 @@
-package AIMS;
 public class DigitalVideoDisc {
-
     // Section 16: classifier member (static)
     private static int nbDigitalVideoDiscs = 0;
     // Section 16: instance member
