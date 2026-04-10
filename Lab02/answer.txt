@@ -2,7 +2,7 @@ Câu hỏi: Nếu tạo constructor để khởi tạo DVD bằng title, rồi
 tạo thêm constructor để khởi tạo DVD bằng category.
 Java có cho phép điều này không?
 Trả lời:
-Không, Java KHÔNG cho phép điều này.
+Không, Java không cho phép điều này.
 Java phân biệt các constructor overload dựa trên kiểu dữ liệu
 và số lượng tham số, không dựa vào tên tham số.
 Cả hai constructor đều có signature:
@@ -21,3 +21,9 @@ Trả lời:
 Java LUÔN LUÔN là Pass by Value (truyền tham trị).
 Khi truyền một object vào method, Java truyền một BẢN SAO
 của tham chiếu (địa chỉ bộ nhớ), không phải tham chiếu gốc.
+
+
+Câu hỏi 2a: Sau khi gọi hàm swap(jungleDVD, cinderellaDVD), tại sao tiêu đề của hai đối tượng này vẫn giữ nguyên?
+Vì hàm swap chỉ hoán đổi 2 biến bản sao cục bộ bên trong hàm. Các biến gốc bên ngoài không hề bị tác động.
+Câu hỏi 2b: Tại sao sau khi gọi hàm changeTitle(jungleDVD, cinderellaDVD.getTitle()) đề mục JungleDVD lại thay đổi?
+Vì bản sao được truyền vào hàm vẫn trỏ đến cùng một đối tượng thật trong bộ nhớ. Lệnh .setTitle() đã sửa trực tiếp nội dung của đối tượng dùng chung đó.
