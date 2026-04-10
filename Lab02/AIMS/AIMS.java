@@ -1,4 +1,4 @@
-package AIMS;
+package Lab02.AIMS;
 public class AIMS {
 
     public static void main(String[] args) {
@@ -20,14 +20,12 @@ public class AIMS {
         System.out.println("\n--- Removing Star Wars ---");
         anOrder.removeDigitalVideoDisc(dvd2);
         anOrder.displayCart();
-
         // Section 14.2: Test overloading - add two DVDs at once
         System.out.println("\n--- Adding two DVDs at once ---");
         DigitalVideoDisc dvd4 = new DigitalVideoDisc("Frozen", "Animation", 24.99f);
         DigitalVideoDisc dvd5 = new DigitalVideoDisc("Moana", "Animation", 22.99f);
         anOrder.addDigitalVideoDisc(dvd4, dvd5);
         anOrder.displayCart();
-
         // Section 16: Test classifier member
         System.out.println("\nTotal DVDs created: " + DigitalVideoDisc.getNbDigitalVideoDiscs());
     }
