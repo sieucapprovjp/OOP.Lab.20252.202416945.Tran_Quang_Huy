@@ -1,8 +1,6 @@
-package Lab02.AIMS;
+package AIMS;
 public class AIMS {
-
     public static void main(String[] args) {
-
         // Section 12: Create a new cart
         Cart anOrder = new Cart();
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King",

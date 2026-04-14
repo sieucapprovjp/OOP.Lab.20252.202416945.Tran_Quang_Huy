@@ -1,4 +1,4 @@
-package Lab02.AIMS;
+package AIMS;
 public class Cart {
 
     // Section 11: class constant
@@ -74,5 +74,38 @@ public class Cart {
     }
     public int getQtyOrdered() {
         return qtyOrdered;
+    }
+
+    // Exercise 4: print() method - formatted cart output
+    public void print() {
+        System.out.println("***********************CART***********************");
+        System.out.println("Ordered Items:");
+        for (int i = 0; i < qtyOrdered; i++) {
+            System.out.printf("%d. %s%n", (i + 1), itemsOrdered[i].toString());
+        }
+        System.out.printf("Total cost: %.2f%n", totalCost());
+        System.out.println("***************************************************");
+    }
+
+    // Exercise 4: searchById() method
+    public DigitalVideoDisc searchById(int id) {
+        for (int i = 0; i < qtyOrdered; i++) {
+            if (itemsOrdered[i].getId() == id) {
+                return itemsOrdered[i];
+            }
+        }
+        System.out.println("No match found for ID: " + id);
+        return null;
+    }
+
+    // Exercise 4: searchByTitle() method - using isMatch() for partial matching
+    public DigitalVideoDisc searchByTitle(String title) {
+        for (int i = 0; i < qtyOrdered; i++) {
+            if (itemsOrdered[i].isMatch(title)) {
+                return itemsOrdered[i];
+            }
+        }
+        System.out.println("No match found for title: " + title);
+        return null;
     }
 }

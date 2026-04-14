@@ -1,4 +1,4 @@
-package Lab02.AIMS;
+package AIMS;
 public class DigitalVideoDisc {
     // Section 16: classifier member (static)
     private static int nbDigitalVideoDiscs = 0;
@@ -81,5 +81,16 @@ public class DigitalVideoDisc {
                 +"|Director: "+director
                 +"|Length: "+length + " mins"
                 +"|Cost:"+cost);
+    }
+
+    // Exercise 4: toString() method for formatted DVD output
+    @Override
+    public String toString() {
+        return "DVD - " + title + " - " + category + " - " + director + " - " + length + ": " + cost + " $";
+    }
+
+    // Exercise 4: isMatch() method - checks if DVD title matches the given title (partial match)
+    public boolean isMatch(String title) {
+        return this.title != null && this.title.toLowerCase().contains(title.toLowerCase());
     }
 }

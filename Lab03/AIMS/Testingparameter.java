@@ -1,6 +1,5 @@
-package Lab02.AIMS;
+package AIMS;
 public class Testingparameter {
-
     public static void main(String[] args) {
         // Section 15: Test pass by value
         DigitalVideoDisc jungleDVD = new DigitalVideoDisc("Jungle");
