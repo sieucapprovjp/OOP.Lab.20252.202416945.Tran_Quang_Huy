@@ -1,96 +1,41 @@
 package AIMS;
-public class DigitalVideoDisc {
-    // Section 16: classifier member (static)
-    private static int nbDigitalVideoDiscs = 0;
-    // Section 16: instance member
-    private int id;
-    // Section 8: attributes
-    private String title;
-    private String category;
-    private String director;
-    private int length;
-    private float cost;
-    // Section 10: constructors (method overloading)
+
+public class DigitalVideoDisc extends Disc implements playable {
+
+    // 1. Constructor chỉ có title
     public DigitalVideoDisc(String title) {
-        this.title = title;
-        nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
+        // Truyền giá trị mặc định (null, 0) cho các thuộc tính còn thiếu lên Disc
+        super(title, null, 0.0f, 0, null);
     }
+    // 2. Constructor có title, category, cost
     public DigitalVideoDisc(String title, String category, float cost) {
-        this.title = title;
-        this.category = category;
-        this.cost = cost;
-        nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
+        super(title, category, cost, 0, null);
     }
+    // 3. Constructor có title, category, director, cost
     public DigitalVideoDisc(String title, String category, String director, float cost) {
-        this.title=title;
-        this.category=category;
-        this.director=director;
-        this.cost=cost;
-        nbDigitalVideoDiscs++;
-        this.id=nbDigitalVideoDiscs;
+        super(title, category, cost, 0, director);
     }
-
+    // 4. Constructor đầy đủ
     public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
-        this.title = title;
-        this.category = category;
-        this.director = director;
-        this.length = length;
-        this.cost = cost;
-        nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
+        super(title, category, cost, length, director);
     }
 
-    // Section 9: getters only
-    public int getId() {
-        return id;
-    }
-    public String getTitle() {
-        return title;
-    }
-    public String getCategory() {
-        return category;
-    }
-    public String getDirector() {
-        return director;
-    }
-    public int getLength() {
-        return length;
-    }
-    public float getCost() {
-        return cost;
-    }
-    public static int getNbDigitalVideoDiscs() {
-        return nbDigitalVideoDiscs;
-    }
-    // Section 15: temporary setter for title
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    public void playDVD() {
-        if (this.length <= 0) {
-            System.out.println("The DVD \""+title+"\" cannot be played.");
+    // Ghi đè hàm play() từ interface Playable (Thay thế cho playDVD cũ)
+    @Override
+    public void play() {
+        // Giữ lại logic cũ của bạn: kiểm tra độ dài đĩa
+        if (this.getLength() <= 0) {
+            System.out.println("The DVD \"" + this.getTitle() + "\" cannot be played.");
         } else {
-            System.out.println("Playing DVD: "+title+"("+length+" mins)");
+            System.out.println("Playing DVD: " + this.getTitle() + " (" + this.getLength() + " mins)");
         }
     }
-    public void displayInfo() {
-        System.out.println("ID: "+id+"|Title:"+title
-                +"|Category: "+category
-                +"|Director: "+director
-                +"|Length: "+length + " mins"
-                +"|Cost:"+cost);
-    }
 
-    // Exercise 4: toString() method for formatted DVD output
+    // Ghi đè hàm toString() bắt buộc
     @Override
     public String toString() {
-        return "DVD - " + title + " - " + category + " - " + director + " - " + length + ": " + cost + " $";
-    }
-
-    // Exercise 4: isMatch() method - checks if DVD title matches the given title (partial match)
-    public boolean isMatch(String title) {
-        return this.title != null && this.title.toLowerCase().contains(title.toLowerCase());
+        // Lưu ý: Phải dùng các hàm getTitle(), getCategory()... thay vì gọi trực tiếp biến title, category
+        // vì các biến này giờ là private ở lớp cha.
+        return "DVD - " + this.getTitle() + " - " + this.getCategory() + " - " + this.getDirector() + " - " + this.getLength() + ": " + this.getCost() + " $";
     }
 }

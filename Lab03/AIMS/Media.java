@@ -1,14 +1,12 @@
 package AIMS;
 
 public abstract class Media {
-
     private static int nbMedia =0;
 
     private int id;
     private String title;
     private String category;
     private float cost;
-
     public Media() {
         nbMedia++;
         this.id = nbMedia;
@@ -36,7 +34,6 @@ public abstract class Media {
         if (keyword == null || this.title == null) return false;
         return this.title.toLowerCase().contains(keyword.toLowerCase());
     }
-    // Each subclass must implement its own toString()
     @Override
     public abstract String toString();
 }
