@@ -1,4 +1,4 @@
-package hust.soict.hedspi.aims.media; // Đổi lại tên package nếu cần
+package hust.soict.hedspi.aims.media;
 
 import java.util.Comparator;
 
@@ -10,7 +10,6 @@ public class MediaComparatorByTitle implements Comparator<Media> {
         if (titleCompare != 0) {
             return titleCompare; // Nếu khác tiêu đề thì trả về kết quả so sánh
         }
-
         // 2. Nếu trùng tiêu đề, sắp xếp theo Giá (Giảm dần - Món đắt hơn xếp trước)
         return Float.compare(m2.getCost(), m1.getCost());
     }

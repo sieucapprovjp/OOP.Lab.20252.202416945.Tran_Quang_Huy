@@ -37,8 +37,6 @@ public abstract class Media {
         return this.title.toLowerCase().contains(keyword.toLowerCase());
     }
 
-    // Thêm import này ở đầu file: import java.util.Comparator;
-
     public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitle();
     public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCost();
 

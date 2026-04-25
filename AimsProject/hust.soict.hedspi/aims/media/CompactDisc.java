@@ -1,4 +1,3 @@
-// File: CompactDisc.java
 package hust.soict.hedspi.aims.media;
 
 import java.util.ArrayList;

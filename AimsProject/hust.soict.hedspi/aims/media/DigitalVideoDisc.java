@@ -19,10 +19,9 @@ public class DigitalVideoDisc extends Disc implements playable {
         super(title, category, cost, length, director);
     }
 
-    // Ghi đè hàm play() từ interface Playable (Thay thế cho playDVD cũ)
+    // Ghi đè hàm play() từ interface Playable
     @Override
     public void play() {
-        // Giữ lại logic cũ của bạn: kiểm tra độ dài đĩa
         if (this.getLength() <= 0) {
             System.out.println("The DVD \"" + this.getTitle() + "\" cannot be played.");
         } else {
@@ -33,8 +32,6 @@ public class DigitalVideoDisc extends Disc implements playable {
     // Ghi đè hàm toString() bắt buộc
     @Override
     public String toString() {
-        // Lưu ý: Phải dùng các hàm getTitle(), getCategory()... thay vì gọi trực tiếp biến title, category
-        // vì các biến này giờ là private ở lớp cha.
         return "DVD - " + this.getTitle() + " - " + this.getCategory() + " - " + this.getDirector() + " - " + this.getLength() + ": " + this.getCost() + " $";
     }
 }

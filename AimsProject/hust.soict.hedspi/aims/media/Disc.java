@@ -1,4 +1,3 @@
-// File: Disc.java
 package hust.soict.hedspi.aims.media;
 
 public abstract class Disc extends Media {

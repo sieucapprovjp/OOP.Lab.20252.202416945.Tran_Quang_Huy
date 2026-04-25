@@ -1,22 +1,27 @@
 package hust.soict.hedspi.aims;
 
 import java.util.Scanner;
+import hust.soict.hedspi.aims.cart.Cart;
+import hust.soict.hedspi.aims.media.Book;
+import hust.soict.hedspi.aims.media.CompactDisc;
+import hust.soict.hedspi.aims.media.DigitalVideoDisc;
+import hust.soict.hedspi.aims.media.Media;
+import hust.soict.hedspi.aims.store.Store;
+import hust.soict.hedspi.aims.media.playable;
 
 public class AIMS {
-    // Biến toàn cục để toàn bộ hệ thống menu có thể truy cập
-    private static Store store = new Store();
+    private static final Store store = new Store();
     private static Cart cart = new Cart();
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        initData(); // Nạp dữ liệu mẫu vào cửa hàng
+        initData();
 
         int choice;
         do {
             showMenu();
             choice = scanner.nextInt();
-            scanner.nextLine(); // Xóa bộ đệm (phím Enter)
-
+            scanner.nextLine();
             switch (choice) {
                 case 1:
                     viewStore();
@@ -37,16 +42,12 @@ public class AIMS {
 
         scanner.close();
     }
-
-    // Nạp sẵn một số sản phẩm vào Store để test
     private static void initData() {
         store.addMedia(new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.99f));
         store.addMedia(new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 121, 24.99f));
         store.addMedia(new CompactDisc("Adele 21", "Music", 15.50f, 0, "Various", "Adele"));
         store.addMedia(new Book("Harry Potter", "Fantasy", 25.00f));
     }
-
-    // ================= MÀN HÌNH CHÍNH =================
     public static void showMenu() {
         System.out.println("\nAIMS: ");
         System.out.println("--------------------------------");
@@ -57,8 +58,6 @@ public class AIMS {
         System.out.println("--------------------------------");
         System.out.print("Please choose a number: 0-1-2-3: ");
     }
-
-    // ================= MÀN HÌNH CỬA HÀNG =================
     public static void viewStore() {
         store.displayStore();
         int choice;
@@ -69,15 +68,12 @@ public class AIMS {
 
             switch (choice) {
                 case 1:
-                    // TODO: Yêu cầu nhập title, tìm trong store, gọi mediaDetailsMenu()
                     System.out.println("Chức năng đang được cập nhật...");
                     break;
                 case 2:
-                    // TODO: Yêu cầu nhập title, tìm trong store, thêm vào cart
                     System.out.println("Chức năng đang được cập nhật...");
                     break;
                 case 3:
-                    // TODO: Yêu cầu nhập title, tìm trong store, ép kiểu sang Playable và gọi hàm play()
                     System.out.println("Chức năng đang được cập nhật...");
                     break;
                 case 4:
@@ -103,8 +99,6 @@ public class AIMS {
         System.out.println("--------------------------------");
         System.out.print("Please choose a number: 0-1-2-3-4: ");
     }
-
-    // ================= MÀN HÌNH CHI TIẾT SẢN PHẨM =================
     public static void mediaDetailsMenu() {
         System.out.println("\nOptions: ");
         System.out.println("--------------------------------");
@@ -114,14 +108,10 @@ public class AIMS {
         System.out.println("--------------------------------");
         System.out.print("Please choose a number: 0-1-2: ");
     }
-
-    // ================= MÀN HÌNH CẬP NHẬT CỬA HÀNG =================
     public static void updateStore() {
-        // TODO: Cho phép người dùng nhập thông tin để tạo Media mới và thêm vào store, hoặc xóa đi
         System.out.println("\n--- Chức năng Update Store (Đang xây dựng) ---");
     }
 
-    // ================= MÀN HÌNH GIỎ HÀNG =================
     public static void seeCurrentCart() {
         cart.print();
         int choice;
@@ -129,28 +119,88 @@ public class AIMS {
             cartMenu();
             choice = scanner.nextInt();
             scanner.nextLine();
-
             switch (choice) {
                 case 1:
-                    // TODO: Filter (Theo ID hoặc Title)
+                    // Filter (Theo ID hoặc Title)
+                    System.out.println("Lọc sản phẩm theo: 1. ID | 2. Tiêu đề");
+                    int filterChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    if (filterChoice == 1) {
+                        System.out.print("Nhập ID cần tìm: ");
+                        int id = scanner.nextInt();
+                        scanner.nextLine();
+                        Media foundById = cart.searchById(id);
+                        if (foundById != null) {
+                            System.out.println("Kết quả: " + foundById.toString());
+                        } else {
+                            System.out.println("Không tìm thấy sản phẩm với ID: " + id);
+                        }
+                    } else if (filterChoice == 2) {
+                        System.out.print("Nhập tiêu đề cần tìm: ");
+                        String title = scanner.nextLine();
+                        Media foundByTitle = cart.searchByTitle(title);
+                        if (foundByTitle != null) {
+                            System.out.println("Kết quả: " + foundByTitle.toString());
+                        } else {
+                            System.out.println("Không tìm thấy sản phẩm với tiêu đề: " + title);
+                        }
+                    } else {
+                        System.out.println("Lựa chọn không hợp lệ.");
+                    }
                     break;
+
                 case 2:
-                    // TODO: Sort (Theo Title/Cost hoặc Cost/Title)
+                    System.out.println("Sắp xếp theo: 1. Tiêu đề -> Giá | 2. Giá -> Tiêu đề");
+                    int sortChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    if (sortChoice == 1) {
+                        cart.sortByTitleCost();
+                        cart.print();
+                    } else if (sortChoice == 2) {
+                        cart.sortByCostTitle();
+                        cart.print();
+                    } else {
+                        System.out.println("Lựa chọn không hợp lệ.");
+                    }
                     break;
+
                 case 3:
-                    // TODO: Xóa sản phẩm khỏi giỏ
+                    System.out.print("Nhập tiêu đề sản phẩm cần xóa: ");
+                    String removeTitle = scanner.nextLine();
+                    Media mediaToRemove = cart.searchByTitle(removeTitle);
+                    if (mediaToRemove != null) {
+                        cart.removeMedia(mediaToRemove);
+                    } else {
+                        System.out.println("Không tìm thấy sản phẩm trong giỏ hàng.");
+                    }
                     break;
+
                 case 4:
-                    // TODO: Play sản phẩm trong giỏ
+                    System.out.print("Nhập tiêu đề sản phẩm muốn Play: ");
+                    String playTitle = scanner.nextLine();
+                    Media mediaToPlay = cart.searchByTitle(playTitle);
+                    if (mediaToPlay != null) {
+                        if (mediaToPlay instanceof playable) {
+                            ((playable) mediaToPlay).play();
+                        } else {
+                            System.out.println("Sản phẩm này không hỗ trợ tính năng Play (Ví dụ: Sách).");
+                        }
+                    } else {
+                        System.out.println("Không tìm thấy sản phẩm trong giỏ hàng.");
+                    }
                     break;
+
                 case 5:
+                    // Place order
                     System.out.println("Cảm ơn bạn! Đơn hàng của bạn đã được ghi nhận.");
-                    // Làm trống giỏ hàng sau khi đặt (Bạn có thể thêm hàm clear() vào Cart)
-                    choice = 0; // Quay về main menu sau khi đặt xong
+                    cart = new Cart();
+                    choice = 0;
                     break;
+
                 case 0:
                     System.out.println("Quay lại màn hình trước.");
                     break;
+
                 default:
                     System.out.println("Lựa chọn không hợp lệ!");
             }

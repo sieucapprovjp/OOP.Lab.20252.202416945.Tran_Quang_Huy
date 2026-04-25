@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Cart {
-    // Thay thế mảng cũ bằng ArrayList chứa các đối tượng Media
     private ArrayList<Media> itemsOrdered = new ArrayList<Media>();
 
     // Hàm thêm sản phẩm vào giỏ
@@ -44,7 +43,7 @@ public class Cart {
                 return media;
             }
         }
-        return null; // Không tìm thấy
+        return null;
     }
 
     // Tìm kiếm theo Tiêu đề (Title)
@@ -54,10 +53,8 @@ public class Cart {
                 return media;
             }
         }
-        return null; // Không tìm thấy
+        return null;
     }
-
-    // Thêm import này ở đầu file: import java.util.Collections;
 
     // Sắp xếp theo Tiêu đề rồi đến Giá
     public void sortByTitleCost() {
@@ -71,12 +68,11 @@ public class Cart {
         System.out.println("Đã sắp xếp giỏ hàng theo Giá -> Tiêu đề.");
     }
 
-    // In hóa đơn (Yêu cầu của Lab 03 - Section 4)
+    // In hóa đơn
     public void print() {
         System.out.println("***********************CART***********************");
         System.out.println("Ordered Items:");
         for (int i = 0; i < itemsOrdered.size(); i++) {
-            // Nhờ tính đa hình, hàm toString() của đúng loại sản phẩm (Book/CD/DVD) sẽ được gọi
             System.out.println((i + 1) + ". " + itemsOrdered.get(i).toString());
         }
         System.out.println("Total cost: " + totalCost() + " $");

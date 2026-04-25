@@ -1,4 +1,3 @@
-// File: Track.java
 package hust.soict.hedspi.aims.media;
 
 public class Track implements playable {
