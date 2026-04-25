@@ -2,36 +2,39 @@ package AIMS;
 
 public class StoreTest {
     public static void main(String[] args) {
-        // Create a store
+        // Khởi tạo cửa hàng
         Store store = new Store();
 
-        // Create sample DVDs
+        // 1. Tạo các sản phẩm ĐA DẠNG (DVD, CD, Book)
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.99f);
         DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 121, 24.99f);
-        DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", "Ron Clements", 90, 20.99f);
 
-        // Test addDVD()
-        System.out.println("=== Test addDVD() ===");
-        store.addDVD(dvd1);
-        store.addDVD(dvd2);
-        store.addDVD(dvd3);
+        CompactDisc cd = new CompactDisc("Star Wars Soundtrack", "Music", 24.99f, 0, "George Lucas", "John Williams");
+        Book book = new Book("Aladdin Story", "Fairy Tale", 20.99f);
+
+        // Test addMedia()
+        System.out.println("=== Test addMedia() ===");
+        store.addMedia(dvd1);
+        store.addMedia(dvd2);
+        store.addMedia(cd);
+        store.addMedia(book);
 
         // Display store
         System.out.println("\n=== Display Store ===");
         store.displayStore();
 
-        // Test removeDVD()
-        System.out.println("\n=== Test removeDVD() ===");
-        store.removeDVD(dvd2);
+        // Test removeMedia()
+        System.out.println("\n=== Test removeMedia() ===");
+        store.removeMedia(dvd2);
 
         // Display store after removal
         System.out.println("\n=== Display Store After Removal ===");
         store.displayStore();
 
-        // Test removing a DVD not in store
-        System.out.println("\n=== Test removeDVD() - Not in Store ===");
+        // Test removing a Media not in store
+        System.out.println("\n=== Test removeMedia() - Not in Store ===");
         DigitalVideoDisc dvd4 = new DigitalVideoDisc("Frozen", "Animation", 15.99f);
-        store.removeDVD(dvd4);
+        store.removeMedia(dvd4);
 
         System.out.println("\n=== All Tests Completed ===");
     }

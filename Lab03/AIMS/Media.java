@@ -1,5 +1,7 @@
 package AIMS;
 
+import java.util.Comparator;
+
 public abstract class Media {
     private static int nbMedia =0;
 
@@ -34,6 +36,12 @@ public abstract class Media {
         if (keyword == null || this.title == null) return false;
         return this.title.toLowerCase().contains(keyword.toLowerCase());
     }
+
+    // Thêm import này ở đầu file: import java.util.Comparator;
+
+    public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitle();
+    public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCost();
+
     @Override
     public abstract String toString();
 }

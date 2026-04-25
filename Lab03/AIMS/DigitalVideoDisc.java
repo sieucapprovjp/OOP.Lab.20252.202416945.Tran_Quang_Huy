@@ -1,7 +1,6 @@
 package AIMS;
 
 public class DigitalVideoDisc extends Disc implements playable {
-
     // 1. Constructor chỉ có title
     public DigitalVideoDisc(String title) {
         // Truyền giá trị mặc định (null, 0) cho các thuộc tính còn thiếu lên Disc

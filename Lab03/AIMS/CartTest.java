@@ -2,62 +2,64 @@ package AIMS;
 
 public class CartTest {
     public static void main(String[] args) {
-        // Create sample DVDs
-        DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.99f);
-        DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 121, 24.99f);
-        DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", "Ron Clements", 90, 20.99f);
-
-        // Create a cart
+        // Khởi tạo giỏ hàng
         Cart cart = new Cart();
 
-        // Add DVDs to cart
-        System.out.println("=== Adding DVDs to Cart ===");
-        cart.addDigitalVideoDisc(dvd1);
-        cart.addDigitalVideoDisc(dvd2);
-        cart.addDigitalVideoDisc(dvd3);
+        // 1. Tạo các sản phẩm ĐA DẠNG (DVD, CD, Book)
+        DigitalVideoDisc dvd = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.99f);
 
-        // Test 1: print() method
+        CompactDisc cd = new CompactDisc("Star Wars Soundtrack", "Music", 24.99f, 0, "George Lucas", "John Williams");
+        cd.addTrack(new Track("Main Theme", 5));
+        cd.addTrack(new Track("Imperial March", 4));
+
+        Book book = new Book("Aladdin Story", "Fairy Tale", 20.99f);
+        book.addAuthors("Disney");
+
+        // 2. Thêm tất cả vào giỏ hàng (Sử dụng chung hàm addMedia)
+        System.out.println("=== Adding Media to Cart ===");
+        cart.addMedia(dvd);
+        cart.addMedia(cd);
+        cart.addMedia(book);
+
+        // Test 1: In giỏ hàng ra màn hình (Test đa hình toString)
         System.out.println("\n=== Test 1: print() method ===");
         cart.print();
 
-        // Test 2: searchById() - existing ID
-        System.out.println("\n=== Test 2: searchById() - ID = 2 ===");
-        DigitalVideoDisc foundById = cart.searchById(2);
+        // Test 2: searchById() - Tìm thấy
+        System.out.println("\n=== Test 2: searchById() - Tìm ID hợp lệ ===");
+        // Lấy ID của đĩa CD để test (vì ID được tự động tăng nên ta lấy thẳng từ object)
+        int searchId = cd.getId();
+        Media foundById = cart.searchById(searchId);
         if (foundById != null) {
-            System.out.println("Found: " + foundById.getTitle());
+            System.out.println("Found: " + foundById.toString());
         }
 
-        // Test 3: searchById() - non-existing ID
-        System.out.println("\n=== Test 3: searchById() - ID = 99 ===");
-        DigitalVideoDisc notFoundById = cart.searchById(99);
+        // Test 3: searchById() - Không tìm thấy
+        System.out.println("\n=== Test 3: searchById() - Tìm ID = 99 ===");
+        Media notFoundById = cart.searchById(99);
+        if (notFoundById == null) {
+            System.out.println("Không tìm thấy sản phẩm có ID 99.");
+        }
 
-        // Test 4: searchByTitle() - existing title (partial match)
-        System.out.println("\n=== Test 4: searchByTitle() - 'Lion' ===");
-        DigitalVideoDisc foundByTitle = cart.searchByTitle("Lion");
+        // Test 4: searchByTitle() - Tìm thấy (Khớp 1 phần)
+        System.out.println("\n=== Test 4: searchByTitle() - 'Star' ===");
+        Media foundByTitle = cart.searchByTitle("Star");
         if (foundByTitle != null) {
             System.out.println("Found: " + foundByTitle.toString());
         }
 
-        // Test 5: searchByTitle() - non-existing title
+        // Test 5: searchByTitle() - Không tìm thấy
         System.out.println("\n=== Test 5: searchByTitle() - 'Frozen' ===");
-        DigitalVideoDisc notFoundByTitle = cart.searchByTitle("Frozen");
+        Media notFoundByTitle = cart.searchByTitle("Frozen");
+        if (notFoundByTitle == null) {
+            System.out.println("Không tìm thấy sản phẩm chứa từ khóa 'Frozen'.");
+        }
 
-        // Test 6: isMatch() method directly
-        System.out.println("\n=== Test 6: isMatch() method ===");
-        System.out.println("dvd1.isMatch('Lion'): " + dvd1.isMatch("Lion"));
-        System.out.println("dvd1.isMatch('lion'): " + dvd1.isMatch("lion"));
-        System.out.println("dvd1.isMatch('Star'): " + dvd1.isMatch("Star"));
-        System.out.println("dvd1.isMatch('The Lion King'): " + dvd1.isMatch("The Lion King"));
-
-        // Test 7: toString() method directly
-        System.out.println("\n=== Test 7: toString() method ===");
-        System.out.println("dvd1.toString(): " + dvd1.toString());
-        System.out.println("dvd2.toString(): " + dvd2.toString());
-
-        // Test 8: Remove a DVD and print cart again
-        System.out.println("\n=== Test 8: Remove DVD and print cart ===");
-        cart.removeDigitalVideoDisc(dvd2);
+        // Test 6: Remove sản phẩm và in lại giỏ
+        System.out.println("\n=== Test 6: Remove CD and print cart ===");
+        cart.removeMedia(cd);
         cart.print();
+
         System.out.println("\n=== All Tests Completed ===");
     }
 }
