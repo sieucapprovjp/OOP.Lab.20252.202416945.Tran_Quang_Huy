@@ -163,7 +163,6 @@ public class AIMS {
                         System.out.println("Lựa chọn không hợp lệ.");
                     }
                     break;
-
                 case 3:
                     System.out.print("Nhập tiêu đề sản phẩm cần xóa: ");
                     String removeTitle = scanner.nextLine();
