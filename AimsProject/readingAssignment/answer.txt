@@ -1,0 +1,19 @@
+1. What class should implement the Comparable interface?
+
+Trả lời: Lớp Media nên là lớp thực thi interface Comparable<Media>.
+Vì Media là lớp cha (super class) trừu tượng của tất cả các mặt hàng (Book, CompactDisc, DigitalVideoDisc), việc để Media implements Comparable sẽ thiết lập một "quy tắc sắp xếp tự nhiên" chung cho toàn bộ các sản phẩm nằm trong giỏ hàng.
+
+2. In those classes, how should you implement the compareTo() method to reflect the ordering that we want?
+Trả lời:
+Bên trong lớp Media, chúng ta sẽ ghi đè (override) phương thức compareTo(Media other). Giả sử chúng ta muốn sắp xếp mặc định theo quy tắc Tiêu đề (Alphabet) -> Giá (Giảm dần), logic cài đặt sẽ diễn ra theo 2 bước:
+So sánh tiêu đề của đối tượng hiện tại (this) với đối tượng bị so sánh (other) bằng hàm compareToIgnoreCase().
+Nếu tiêu đề giống nhau, tiếp tục dùng Float.compare() để so sánh giá trị cost theo thứ tự giảm dần.
+
+3. Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+(Chúng ta có thể có 2 quy tắc sắp xếp cùng lúc nếu dùng cách tiếp cận Comparable này không?)
+
+Trả lời:
+KHÔNG. Ta không thể có đồng thời 2 quy tắc sắp xếp khác nhau nếu chỉ sử dụng interface Comparable.
+Giải thích:
+Comparable dùng để định nghĩa "Sắp xếp tự nhiên" (Natural Ordering) của một đối tượng. Mỗi lớp chỉ có thể ghi đè phương thức compareTo() đúng một lần duy nhất. Do đó, nó chỉ bị "khóa cứng" vào một quy tắc sắp xếp mặc định (ví dụ: chỉ xếp được theo Title -> Cost).
+Để có thể linh hoạt chọn lựa nhiều quy tắc sắp xếp khác nhau lúc chạy chương trình (như Title -> Cost hoặc Cost -> Title), chúng ta bắt buộc phải sử dụng interface Comparator bằng cách tạo ra các lớp riêng biệt (như MediaComparatorByTitleCost và MediaComparatorByCostTitle) giống như cách chúng ta đã cài đặt thực tế trong dự án AIMS.
