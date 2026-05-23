@@ -10,7 +10,6 @@ import hust.soict.hedspi.aims.media.Media;
 
 public class StoreManagerScreen extends JFrame {
     private Store store;
-
     public StoreManagerScreen(Store store) {
         this.store = store;
 
@@ -27,7 +26,6 @@ public class StoreManagerScreen extends JFrame {
         setVisible(true);
     }
 
-    // Tạo cụm giao diện phía Bắc (Menu + Header)
     JPanel createNorth() {
         JPanel north = new JPanel();
         north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
@@ -36,19 +34,17 @@ public class StoreManagerScreen extends JFrame {
         return north;
     }
 
-    // Tạo thanh Menu Bar điều hướng hệ thống
     JMenuBar createMenuBar() {
         JMenu menu = new JMenu("Options");
 
         JMenuItem viewStoreMenu = new JMenuItem("View store");
         menu.add(viewStoreMenu);
 
-        // Sự kiện khi bấm "View Store" -> Vẽ lại màn hình chính
         viewStoreMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new StoreManagerScreen(store);
-                dispose(); // Đóng cửa sổ cũ
+                dispose();
             }
         });
 
@@ -62,7 +58,6 @@ public class StoreManagerScreen extends JFrame {
         smUpdateStore.add(addDVDMenu);
         menu.add(smUpdateStore);
 
-        // Thiết lập bộ lắng nghe chuyển màn hình cho các chức năng thêm mới vật phẩm
         addBookMenu.addActionListener(new AddItemListener("Book"));
         addCDMenu.addActionListener(new AddItemListener("CD"));
         addDVDMenu.addActionListener(new AddItemListener("DVD"));
@@ -72,8 +67,6 @@ public class StoreManagerScreen extends JFrame {
         menuBar.add(menu);
         return menuBar;
     }
-
-    // Tạo dải Header màu xanh Cyan chữ lớn thương hiệu
     JPanel createHeader() {
         JPanel header = new JPanel();
         header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
@@ -88,14 +81,11 @@ public class StoreManagerScreen extends JFrame {
         header.add(Box.createRigidArea(new Dimension(10, 10)));
         return header;
     }
-
-    // Tạo lưới hiển thị danh sách Media ở Center
     JPanel createCenter() {
         JPanel center = new JPanel();
         center.setLayout(new GridLayout(3, 3, 2, 2));
 
         ArrayList<Media> mediaInStore = store.getItemsInStore();
-        // Hiển thị tối đa 9 item lên cấu trúc lưới 3x3
         int limit = Math.min(mediaInStore.size(), 9);
         for (int i = 0; i < limit; i++) {
             MediaStore cell = new MediaStore(mediaInStore.get(i));
@@ -103,8 +93,6 @@ public class StoreManagerScreen extends JFrame {
         }
         return center;
     }
-
-    // Inner Class điều hướng chuyển sang các màn hình nhập liệu tương ứng
     private class AddItemListener implements ActionListener {
         private String type;
         public AddItemListener(String type) { this.type = type; }
@@ -118,7 +106,7 @@ public class StoreManagerScreen extends JFrame {
             } else if (type.equals("DVD")) {
                 new AddDigitalVideoDiscToStoreScreen(store);
             }
-            dispose(); // Giải phóng màn hình hiển thị cũ nhằm tối ưu bộ nhớ
+            dispose();
         }
     }
 }
