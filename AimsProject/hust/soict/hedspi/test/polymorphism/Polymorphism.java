@@ -1,6 +1,11 @@
 package hust.soict.hedspi.test.polymorphism;
 
-import hust.soict.hedspi.aims.media.*;
+// Thêm các dòng import chuẩn này vào đầu file Polymorphism.java
+import hust.soict.hedspi.aims.media.Media;
+import hust.soict.hedspi.aims.media.DigitalVideoDisc;
+import hust.soict.hedspi.aims.media.CompactDisc;
+import hust.soict.hedspi.aims.media.Book;
+import hust.soict.hedspi.aims.media.Track;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -24,17 +24,18 @@ public class Store {
             System.out.println("Không tìm thấy \"" + media.getTitle() + "\" trong kho.");
         }
     }
-    // Hàm hiển thị danh sách sản phẩm trong cửa hàng
     public void displayStore() {
         System.out.println("******************** STORE INVENTORY ********************");
         if (itemsInStore.size() == 0) {
             System.out.println("Cửa hàng hiện đang trống.");
         } else {
             for (int i = 0; i < itemsInStore.size(); i++) {
-                // Tự động gọi toString() tương ứng của Book/CD/DVD
                 System.out.println((i + 1) + ". " + itemsInStore.get(i).toString());
             }
         }
         System.out.println("*********************************************************");
+    }
+    public ArrayList<Media> getItemsInStore() {
+        return this.itemsInStore;
     }
 }

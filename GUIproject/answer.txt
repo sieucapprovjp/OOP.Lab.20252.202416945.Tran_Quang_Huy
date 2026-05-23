@@ -1,0 +1,20 @@
+1. Compare the top-level containers in Swing and AWT:
+- In AWT: The top-level container used for an application window is 'Frame'. Components are added directly onto the Frame itself using the add() method.
+- In Swing: The top-level container is 'JFrame'. Because Swing components are lightweight, they cannot be added directly to the JFrame. Instead, they must be added onto the Content Pane of the JFrame, which is obtained via getContentPane().
+
+2. Compare the class name of components in AWT and the corresponding class's name in Swing:
+- Swing components are derived from JComponent and almost all of them start with the prefix "J".
+- Examples:
+  + Label (AWT)       ---> JLabel (Swing)
+  + Button (AWT)      ---> JButton (Swing)
+  + TextField (AWT)   ---> JTextField (Swing)
+  + Frame (AWT)       ---> JFrame (Swing)
+  + Panel (AWT)       ---> JPanel (Swing)
+
+3. Compare the event-handling of Swing and AWT applications:
+- The underlying event-handling architecture is fundamentally identical for both libraries. They both use the "Subscribe - Publish" pattern (Observer Design Pattern).
+- Both utilize classes and interfaces from the 'java.awt.event' package (such as ActionListener, ActionEvent). A source component triggers/publishes an event, and registered listeners implement the corresponding interface to handle the callback.
+
+4. The resulting appearances of the applications developed using Swing and AWT might be different as well. Make comparisons:
+- AWT Components: Are "Heavyweight" components. They rely directly on the local platform's windowing toolkit (OS-native peers) to render interface elements. Therefore, an AWT application will look like a Windows app on Windows, and like a macOS app on Mac.
+- Swing Components: Are "Lightweight" components. They are written entirely in Java and drawn directly onto the canvas without using OS-native peers. This gives Swing applications a uniform, cross-platform "Look and Feel" regardless of the underlying operating system. Swing also supports more advanced visual effects like transparency, custom borders, and styling.
