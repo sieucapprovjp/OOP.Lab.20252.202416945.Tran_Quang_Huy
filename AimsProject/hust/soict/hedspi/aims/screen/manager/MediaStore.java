@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import hust.soict.hedspi.aims.exception.PlayerException;
 import hust.soict.hedspi.aims.media.Media;
 import hust.soict.hedspi.aims.media.playable;
 
@@ -21,24 +23,37 @@ public class MediaStore extends JPanel {
 
         JPanel container = new JPanel();
         container.setLayout(new FlowLayout(FlowLayout.CENTER));
+        // Trong file MediaStore.java
         if (media instanceof playable) {
             JButton playButton = new JButton("Play");
             container.add(playButton);
+
             playButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    // Tạo cửa sổ thông báo của Swing trước
                     JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(MediaStore.this), "Play Media", true);
                     dialog.setLayout(new FlowLayout());
-                    dialog.add(new JLabel("Playing: " + media.getTitle()));
-                    try {
-                        ((playable) media).play();
-                    } catch (Exception ex) {
-                        dialog.add(new JLabel("Error playing media: " + ex.getMessage()));
-                    }
 
-                    dialog.setSize(300, 150);
-                    dialog.setLocationRelativeTo(MediaStore.this);
-                    dialog.setVisible(true);
+                    try {
+                        // Gọi phương thức play() ném ra PlayerException đã được import
+                        ((playable) media).play();
+
+                        // Nếu phát đĩa thành công (độ dài > 0), hiển thị thông báo lên JDialog
+                        dialog.add(new JLabel("Playing: " + media.getTitle()));
+                        dialog.setSize(300, 150);
+                        dialog.setLocationRelativeTo(MediaStore.this);
+                        dialog.setVisible(true);
+
+                    } catch (PlayerException ex) {
+                        // Bắt CHÍNH XÁC Checked Exception và hiển thị thông báo lỗi màu đỏ (Yêu cầu mục 11)
+                        JOptionPane.showMessageDialog(
+                                MediaStore.this,
+                                ex.getMessage(),
+                                "Illegal Media Length Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                    }
                 }
             });
         }

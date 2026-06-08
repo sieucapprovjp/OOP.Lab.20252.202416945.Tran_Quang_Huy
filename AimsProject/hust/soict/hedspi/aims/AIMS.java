@@ -2,6 +2,7 @@ package hust.soict.hedspi.aims;
 
 import java.util.Scanner;
 import hust.soict.hedspi.aims.cart.Cart;
+import hust.soict.hedspi.aims.exception.PlayerException;
 import hust.soict.hedspi.aims.media.Book;
 import hust.soict.hedspi.aims.media.CompactDisc;
 import hust.soict.hedspi.aims.media.DigitalVideoDisc;
@@ -180,7 +181,13 @@ public class AIMS {
                     Media mediaToPlay = cart.searchByTitle(playTitle);
                     if (mediaToPlay != null) {
                         if (mediaToPlay instanceof playable) {
-                            ((playable) mediaToPlay).play();
+                            // KHẮC PHỤC LỖI: Bọc khối try-catch bảo vệ tiến trình chạy Console CLI
+                            try {
+                                ((playable) mediaToPlay).play();
+                            } catch (PlayerException e) {
+                                System.err.println("LỖI PHÁT ĐĨA: " + e.getMessage());
+                                e.printStackTrace();
+                            }
                         } else {
                             System.out.println("Sản phẩm này không hỗ trợ tính năng Play (Ví dụ: Sách).");
                         }
@@ -205,7 +212,6 @@ public class AIMS {
             }
         } while (choice != 0);
     }
-
     public static void cartMenu() {
         System.out.println("\nOptions: ");
         System.out.println("--------------------------------");

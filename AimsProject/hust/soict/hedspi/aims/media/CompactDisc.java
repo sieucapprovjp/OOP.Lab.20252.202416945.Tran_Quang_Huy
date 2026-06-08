@@ -1,10 +1,11 @@
 package hust.soict.hedspi.aims.media;
 
+import hust.soict.hedspi.aims.exception.PlayerException;
 import java.util.ArrayList;
 
 public class CompactDisc extends Disc implements playable {
     private String artist;
-    private ArrayList<Track> tracks = new ArrayList<Track>();
+    private ArrayList<Track> tracks = new ArrayList<>();
 
     public CompactDisc(String title, String category, float cost, int length, String director, String artist) {
         super(title, category, cost, length, director);
@@ -15,21 +16,12 @@ public class CompactDisc extends Disc implements playable {
         if (!tracks.contains(track)) {
             tracks.add(track);
         } else {
-            System.out.println("Bài hát đã có trong đĩa CD.");
-        }
-    }
-
-    public void removeTrack(Track track) {
-        if (tracks.contains(track)) {
-            tracks.remove(track);
-        } else {
-            System.out.println("Bài hát không tồn tại trong đĩa CD.");
+            System.out.println("Track này đã tồn tại trong CD.");
         }
     }
 
     @Override
     public int getLength() {
-        // Ghi đè hàm getLength() của Disc vì chiều dài của CD là tổng chiều dài các track
         int totalLength = 0;
         for (Track track : tracks) {
             totalLength += track.getLength();
@@ -38,11 +30,21 @@ public class CompactDisc extends Disc implements playable {
     }
 
     @Override
-    public void play() {
+    public void play() throws PlayerException {
+        if (this.getLength() <= 0) {
+            String message = "ERROR: CD length is non-positive!";
+            System.err.println(message);
+            throw new PlayerException(message);
+        }
         System.out.println("Playing CD: " + this.getTitle() + " by " + this.artist);
-        System.out.println("Tổng thời lượng: " + this.getLength());
+
         for (Track track : tracks) {
-            track.play();
+            try {
+                track.play();
+            } catch (PlayerException e) {
+                System.err.println("Cannot play track \"" + track.getTitle() + "\": " + e.getMessage());
+                throw e;
+            }
         }
     }
 

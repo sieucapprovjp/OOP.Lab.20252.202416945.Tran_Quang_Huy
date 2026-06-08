@@ -1,0 +1,17 @@
+Lab 05 - JavaFX and Exception Handling
+
+1. What happens when AIMS is not updated to catch exceptions from play()?
+
+After PlayerException is declared as a checked exception, any call to play() must either catch PlayerException or delegate it with throws. If AIMS calls play() without try-catch or throws, the program will not compile with an "unreported exception PlayerException" error. In GUI code, catching it is also necessary so the application can show a dialog instead of letting the action fail silently or print only to the console.
+
+2. Why does Cart use ObservableList instead of a regular List?
+
+TableView needs an observable data source so additions and removals in the cart are reflected in the UI. With ObservableList, removing a media from the cart updates the table automatically without rebuilding the screen manually.
+
+3. Why does Media implement Comparable and still keep Comparator objects?
+
+Comparable defines one natural ordering for Media. In this lab, the natural ordering is title first, then cost in descending order. The Comparator objects are still useful because the cart supports more than one ordering rule: title-then-cost and cost-then-title.
+
+4. How is the exception hierarchy in AIMS organized?
+
+PlayerException is the only self-defined exception in the current AIMS project. It extends java.lang.Exception, so it is a checked exception. The hierarchy is Object -> Throwable -> Exception -> PlayerException.

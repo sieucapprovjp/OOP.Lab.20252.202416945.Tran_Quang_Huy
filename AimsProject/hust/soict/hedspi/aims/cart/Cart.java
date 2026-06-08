@@ -1,25 +1,33 @@
 package hust.soict.hedspi.aims.cart;
 
 import hust.soict.hedspi.aims.media.Media;
-
-import java.util.ArrayList;
-import java.util.Collections;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Cart {
-    private ArrayList<Media> itemsOrdered = new ArrayList<Media>();
+    // Thuộc tính phục vụ Data-driven UI cho JavaFX TableView
+    private ObservableList<Media> itemsOrdered = FXCollections.observableArrayList();
 
-    // Hàm thêm sản phẩm vào giỏ
+    public ObservableList<Media> getItemsOrdered() {
+        return this.itemsOrdered;
+    }
+
     public void addMedia(Media media) {
+        if (media == null) {
+            return;
+        }
         if (!itemsOrdered.contains(media)) {
             itemsOrdered.add(media);
             System.out.println("Đã thêm \"" + media.getTitle() + "\" vào giỏ hàng.");
         } else {
-            System.out.println("Sản phẩm \"" + media.getTitle() + "\" đã có sẵn trong giỏ hàng.");
+            System.out.println("Sản phẩm \"" + media.getTitle() + "\" đã có trong giỏ hàng.");
         }
     }
 
-    // Hàm xóa sản phẩm khỏi giỏ
     public void removeMedia(Media media) {
+        if (media == null) {
+            return;
+        }
         if (itemsOrdered.contains(media)) {
             itemsOrdered.remove(media);
             System.out.println("Đã xóa \"" + media.getTitle() + "\" khỏi giỏ hàng.");
@@ -27,7 +35,7 @@ public class Cart {
             System.out.println("Không tìm thấy \"" + media.getTitle() + "\" trong giỏ hàng.");
         }
     }
-    // Tính tổng tiền
+
     public float totalCost() {
         float total = 0;
         for (Media media : itemsOrdered) {
@@ -36,7 +44,11 @@ public class Cart {
         return total;
     }
 
-    // Tìm kiếm theo ID
+    public void clear() {
+        itemsOrdered.clear();
+    }
+
+    // KHẮC PHỤC LỖI: cannot find symbol method searchById(int)
     public Media searchById(int id) {
         for (Media media : itemsOrdered) {
             if (media.getId() == id) {
@@ -46,7 +58,7 @@ public class Cart {
         return null;
     }
 
-    // Tìm kiếm theo Tiêu đề (Title)
+    // KHẮC PHỤC LỖI: cannot find symbol method searchByTitle(String)
     public Media searchByTitle(String title) {
         for (Media media : itemsOrdered) {
             if (media.isMatch(title)) {
@@ -56,26 +68,26 @@ public class Cart {
         return null;
     }
 
-    // Sắp xếp theo Tiêu đề rồi đến Giá
+    // KHẮC PHỤC LỖI: cannot find symbol method sortByTitleCost()
     public void sortByTitleCost() {
-        Collections.sort(itemsOrdered, Media.COMPARE_BY_TITLE_COST);
+        itemsOrdered.sort(Media.COMPARE_BY_TITLE_COST);
         System.out.println("Đã sắp xếp giỏ hàng theo Tiêu đề -> Giá.");
     }
 
-    // Sắp xếp theo Giá rồi đến Tiêu đề
+    // KHẮC PHỤC LỖI: cannot find symbol method sortByCostTitle()
     public void sortByCostTitle() {
-        Collections.sort(itemsOrdered, Media.COMPARE_BY_COST_TITLE);
+        itemsOrdered.sort(Media.COMPARE_BY_COST_TITLE);
         System.out.println("Đã sắp xếp giỏ hàng theo Giá -> Tiêu đề.");
     }
 
-    // In hóa đơn
+    // KHẮC PHỤC LỖI: cannot find symbol method print()
     public void print() {
-        System.out.println("***********************CART***********************");
+        System.out.println("*********************** CART ***********************");
         System.out.println("Ordered Items:");
         for (int i = 0; i < itemsOrdered.size(); i++) {
             System.out.println((i + 1) + ". " + itemsOrdered.get(i).toString());
         }
         System.out.println("Total cost: " + totalCost() + " $");
-        System.out.println("***************************************************");
+        System.out.println("****************************************************");
     }
 }
